@@ -1,0 +1,17 @@
+{
+  "reddit_credentials": {
+    "client_id": "YOUR_REDDIT_CLIENT_ID",
+    "client_secret": "YOUR_REDDIT_CLIENT_SECRET",
+    "user_agent": "YourBotName/1.0 (by /u/yourusername)",
+    "username": "YOUR_REDDIT_USERNAME",
+    "password": "YOUR_REDDIT_PASSWORD"
+  },
+  "openai_api_key": "sk-proj-YOUR_OPENAI_API_KEY_HERE",
+  "mongodb_uri": "mongodb://localhost:27017/",
+  "mongodb_cert_path": "/path/to/your/certificate.pem",
+  "database_name": "mainDB",
+  "subreddits": [
+    "subreddit1",
+    "subreddit2"
+  ]
+}

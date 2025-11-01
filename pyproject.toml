@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reddit-auto-mod"
+version = "0.1.0"
+description = "Automated moderation assistant for Reddit using AI"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+keywords = ["reddit", "moderation", "ai", "automation", "openai"]
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Communications :: Chat",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "praw>=7.7.0",
+    "openai>=1.0.0",
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "pydantic>=2.0.0",
+    "requests>=2.31.0",
+    "pymongo>=4.6.0",
+    "transformers>=4.35.0",
+    "torch>=2.1.0",
+    "faiss-cpu>=1.7.4",
+    "schedule>=1.2.0",
+    "sentence-transformers>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "black>=23.0.0",
+    "flake8>=6.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/reddit-auto-mod"
+"Bug Reports" = "https://github.com/yourusername/reddit-auto-mod/issues"
+"Source" = "https://github.com/yourusername/reddit-auto-mod"
+
+[project.scripts]
+reddit-auto-mod = "cli.main:main"
+
+[tool.setuptools.packages.find]
+include = ["cli*", "BackEnd*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]

@@ -1,0 +1,377 @@
+# Reddit Auto Mod
+
+Automated moderation assistant for Reddit using AI-powered analysis. This tool helps Reddit moderators by automatically analyzing posts for rule violations, detecting similar content, and generating summaries.
+
+## Features
+
+- 🤖 **AI-Powered Moderation**: Uses OpenAI GPT models to detect rule violations
+- 🔍 **Duplicate Detection**: Identifies similar posts using semantic search
+- 📝 **Auto Summarization**: Generates concise summaries of posts
+- ⚙️ **Easy Configuration**: Simple CLI tool for setting up credentials
+- 🔒 **Secure**: Credentials stored locally with restricted permissions
+
+## Installation
+
+### Prerequisites
+
+- Python 3.8 or higher
+- pip package manager
+- Reddit API credentials (from https://www.reddit.com/prefs/apps)
+- OpenAI API key (from https://platform.openai.com/api-keys)
+- MongoDB instance (optional, for storing processed data)
+
+### Install from PyPI
+
+```bash
+pip install reddit-auto-mod
+```
+
+### Install from Source
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/reddit-auto-mod.git
+cd reddit-auto-mod
+
+# Install in development mode
+pip install -e .
+```
+
+## Quick Start
+
+### 1. Configure Credentials
+
+Run the configuration wizard to set up your Reddit and OpenAI credentials:
+
+```bash
+reddit-auto-mod config
+```
+
+The wizard will prompt you for:
+- **Reddit API credentials**: client_id, client_secret, user_agent, username, password
+- **OpenAI API key**: Your API key for GPT models
+- **MongoDB URI** (optional): Connection string for database storage
+
+Your credentials are stored securely in `~/.reddit-auto-mod/config.json` with restricted file permissions.
+
+### 2. Set Up Subreddits and Database
+
+Run the setup wizard to configure your moderation environment:
+
+```bash
+reddit-auto-mod setup
+```
+
+This interactive wizard will:
+1. **Gather subreddit list**: Enter the subreddits you want to moderate
+2. **Set up MongoDB**: Configure database name and create required collections
+   - `RedditRules`: Stores subreddit rules for violation detection
+   - `RedditSubmissions`: Stores historical posts for similarity detection
+   - `ProcessedRedditSubmissions`: Stores processed moderation results
+3. **Build FAISS indexes**: Creates similarity search indexes for duplicate detection
+
+### 3. View Configuration & Setup Status
+
+To view your current configuration (with sensitive data masked):
+
+```bash
+reddit-auto-mod config --show
+```
+
+To check setup status:
+
+```bash
+reddit-auto-mod setup --status
+```
+
+### 4. Managing Your Setup
+
+**Update configuration:**
+```bash
+reddit-auto-mod config
+```
+
+**Rebuild indexes:**
+```bash
+reddit-auto-mod setup --build-indexes
+```
+
+**Clear configuration:**
+```bash
+reddit-auto-mod config --clear
+```
+
+## Getting API Credentials
+
+### Reddit API Credentials
+
+1. Go to https://www.reddit.com/prefs/apps
+2. Click "Create App" or "Create Another App"
+3. Choose "script" as the app type
+4. Fill in the required fields:
+   - **name**: Your app name (e.g., "My Mod Bot")
+   - **redirect uri**: http://localhost:8080 (not used but required)
+5. Click "Create app"
+6. Note your **client_id** (under the app name) and **client_secret**
+
+### OpenAI API Key
+
+1. Go to https://platform.openai.com/api-keys
+2. Sign in or create an account
+3. Click "Create new secret key"
+4. Copy and save your API key securely
+
+## Architecture
+
+The Reddit Auto Mod system consists of several components:
+
+```
+┌─────────────────┐
+│   CLI Tool      │  (Configuration & Control)
+└────────┬────────┘
+         │
+┌────────▼─────────────────────────────────────┐
+│         Backend Services                      │
+│                                               │
+│  ┌──────────────┐  ┌──────────────────────┐  │
+│  │ Data Plane   │  │  Processing Services │  │
+│  │ - Fetch Data │  │  - Post Similarity   │  │
+│  │ - Orchestrate│  │  - Summarization     │  │
+│  └──────────────┘  │  - Rule Violation    │  │
+│                    └──────────────────────┘  │
+└───────────────────────────────────────────────┘
+         │
+         ▼
+┌─────────────────┐
+│    Database     │  (MongoDB)
+└─────────────────┘
+```
+
+## Usage Examples
+
+### Configure New Credentials
+
+```bash
+$ reddit-auto-mod config
+
+============================================================
+Reddit Auto Mod - Configuration Setup
+============================================================
+
+This wizard will help you configure your credentials.
+All credentials are stored locally in: ~/.reddit-auto-mod/config.json
+
+------------------------------------------------------------
+REDDIT API CREDENTIALS
+------------------------------------------------------------
+You can obtain these from: https://www.reddit.com/prefs/apps
+
+Reddit Client ID: your_client_id_here
+Reddit Client Secret: ********
+Reddit User Agent (e.g., 'MyBot/1.0'): MyBot/1.0
+Reddit Username: your_username
+Reddit Password: ********
+
+------------------------------------------------------------
+OPENAI API KEY
+------------------------------------------------------------
+You can obtain this from: https://platform.openai.com/api-keys
+
+OpenAI API Key: ********
+
+------------------------------------------------------------
+MONGODB CONNECTION (Optional)
+------------------------------------------------------------
+Leave blank to skip MongoDB configuration
+
+MongoDB Connection URI: mongodb://localhost:27017/
+
+Saving configuration...
+
+============================================================
+✓ Configuration saved successfully!
+============================================================
+
+Config file location: /home/user/.reddit-auto-mod/config.json
+
+You can now use the reddit-auto-mod commands.
+```
+
+### View Current Configuration
+
+```bash
+$ reddit-auto-mod config --show
+
+============================================================
+Current Configuration
+============================================================
+
+Reddit Credentials:
+  Client ID: cF0iy7hJ...
+  Client Secret: ********...
+  User Agent: MyBot/1.0
+  Username: your_username
+  Password: ********
+
+OpenAI API Key: sk-proj-...xyz
+
+MongoDB URI: mongodb://localhost:27017/
+
+Config file location: /home/user/.reddit-auto-mod/config.json
+```
+
+## Running the Application
+
+### Start All Services
+
+The easiest way to run Reddit Auto Mod is with the `start` command:
+
+```bash
+reddit-auto-mod start
+```
+
+This command will:
+1. **Start Backend Services**:
+   - Text Summarization API (port 8002)
+   - Rule Violation API (port 8003)  
+   - Post Similarity API (port 8004)
+   - Data Processing API (port 8001)
+
+2. **Start Frontend**: React development server (port 5173)
+
+3. **Start Scheduler**: Daily cron job that processes moderation queue at midnight
+
+The services will run until you press Ctrl+C.
+
+### Check Service Status
+
+To check if all services are running:
+
+```bash
+reddit-auto-mod start --status
+```
+
+### Service URLs
+
+Once started, access the services at:
+- **Frontend**: http://localhost:5173
+- **Data Processing API**: http://localhost:8001
+- **Summarization API**: http://localhost:8002
+- **Rule Violation API**: http://localhost:8003
+- **Similarity API**: http://localhost:8004
+
+### Manual Service Start (Advanced)
+
+If you prefer to start services individually:
+
+```bash
+# Start the summarization service
+python BackEnd/DataProcessingPlane/PostSummarization/TextSummarization.py
+
+# Start the rule violation checker
+python BackEnd/DataProcessingPlane/RuleViolation/RuleViolation.py
+
+# Start the similarity detection service
+python BackEnd/DataProcessingPlane/PostSimilarity/PostSimilarity.py
+
+# Start the main data processing API
+python BackEnd/DataProcessingPlane/DataProcessingAPI.py
+
+# Start the frontend
+cd FrontEnd && npm run dev
+```
+
+## Development
+
+### Install Development Dependencies
+
+```bash
+pip install -e ".[dev]"
+```
+
+### Run Tests
+
+```bash
+pytest
+```
+
+### Code Formatting
+
+```bash
+black .
+```
+
+### Linting
+
+```bash
+flake8
+```
+
+## Configuration File Location
+
+Configuration is stored in your home directory:
+- **Linux/Mac**: `~/.reddit-auto-mod/config.json`
+- **Windows**: `C:\Users\<username>\.reddit-auto-mod\config.json`
+
+The configuration file has restricted permissions (600 on Unix-like systems) to protect your credentials.
+
+## Security Considerations
+
+- Store your `config.json` file securely
+- Never commit credentials to version control
+- Use environment variables for production deployments
+- Regularly rotate your API keys
+- The CLI stores credentials with restricted file permissions
+- Consider using a secrets management system for production
+
+## Troubleshooting
+
+### "No configuration found"
+
+Run `reddit-auto-mod config` to set up your credentials.
+
+### "API request failed"
+
+Ensure your API keys are valid and have sufficient quotas/permissions.
+
+### Import errors
+
+Make sure all dependencies are installed: `pip install -r requirements.txt`
+
+### Permission denied on config file
+
+The config file should have restricted permissions. On Unix systems, run:
+```bash
+chmod 600 ~/.reddit-auto-mod/config.json
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Support
+
+For issues, questions, or contributions, please visit:
+- **GitHub Issues**: https://github.com/yourusername/reddit-auto-mod/issues
+- **Documentation**: https://github.com/yourusername/reddit-auto-mod/wiki
+
+## Acknowledgments
+
+- Built with [PRAW](https://praw.readthedocs.io/) - Python Reddit API Wrapper
+- Powered by [OpenAI GPT](https://openai.com/) models
+- Uses [FAISS](https://github.com/facebookresearch/faiss) for similarity search
+- Uses [Transformers](https://huggingface.co/docs/transformers/) for text summarization
+
+## Disclaimer
+
+This tool is provided as-is for educational and moderation assistance purposes. Be sure to review all automated actions and comply with Reddit's API terms of service and your subreddit's moderation policies.

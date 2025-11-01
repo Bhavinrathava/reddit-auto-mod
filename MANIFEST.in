@@ -1,0 +1,26 @@
+# Include important documentation files
+include README.md
+include LICENSE
+include pyproject.toml
+include setup.py
+
+# Include the CLI package
+recursive-include cli *.py
+
+# Include the Backend package
+recursive-include BackEnd *.py
+recursive-include BackEnd *.pem
+
+# Exclude unnecessary files
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude .DS_Store
+global-exclude *.so
+global-exclude .git*
+
+# Exclude development and build files
+exclude .gitignore
+recursive-exclude tests *
+recursive-exclude FrontEnd *
+recursive-exclude * *.faiss
+recursive-exclude * *.pkl

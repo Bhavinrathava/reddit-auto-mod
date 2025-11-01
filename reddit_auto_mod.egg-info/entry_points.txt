@@ -1,0 +1,2 @@
+[console_scripts]
+reddit-auto-mod = cli.main:main
