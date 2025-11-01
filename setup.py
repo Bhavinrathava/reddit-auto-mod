@@ -17,7 +17,7 @@ setup(
     description='Automated moderation assistant for Reddit using AI',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/yourusername/reddit-auto-mod',
+    url='https://github.com/Bhavinrathava/reddit-auto-mod',
     packages=find_packages(include=['cli', 'cli.*', 'BackEnd', 'BackEnd.*']),
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -62,7 +62,7 @@ setup(
     zip_safe=False,
     keywords='reddit moderation ai automation openai',
     project_urls={
-        'Bug Reports': 'https://github.com/yourusername/reddit-auto-mod/issues',
-        'Source': 'https://github.com/yourusername/reddit-auto-mod',
+        'Bug Reports': 'https://github.com/Bhavinrathava/reddit-auto-mod/issues',
+        'Source': 'https://github.com/Bhavinrathava/reddit-auto-mod',
     },
 )

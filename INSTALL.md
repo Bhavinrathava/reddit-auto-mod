@@ -6,7 +6,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/reddit-auto-mod.git
+git clone https://github.com/Bhavinrathava/reddit-auto-mod.git
 cd reddit-auto-mod
 
 # Install in editable mode

@@ -11,7 +11,7 @@ def main():
     parser = argparse.ArgumentParser(
         prog='reddit-auto-mod',
         description='Reddit Auto Mod - Automated moderation assistant for Reddit',
-        epilog='For more information, visit: https://github.com/yourusername/reddit-auto-mod'
+        epilog='For more information, visit: https://github.com/Bhavinrathava/reddit-auto-mod'
     )
     
     subparsers = parser.add_subparsers(dest='command', help='Available commands')

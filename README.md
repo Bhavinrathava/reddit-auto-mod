@@ -362,8 +362,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For issues, questions, or contributions, please visit:
-- **GitHub Issues**: https://github.com/yourusername/reddit-auto-mod/issues
-- **Documentation**: https://github.com/yourusername/reddit-auto-mod/wiki
+- **GitHub Issues**: https://github.com/Bhavinrathava/reddit-auto-mod/issues
+- **Documentation**:https://github.com/Bhavinrathava/reddit-auto-mod/wiki
 
 ## Acknowledgments
 

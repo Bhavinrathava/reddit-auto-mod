@@ -2,13 +2,13 @@ Metadata-Version: 2.4
 Name: reddit-auto-mod
 Version: 0.1.0
 Summary: Automated moderation assistant for Reddit using AI
-Home-page: https://github.com/yourusername/reddit-auto-mod
-Author: Your Name
-Author-email: Your Name <your.email@example.com>
+Home-page: https://github.com/Bhavinrathava/reddit-auto-mod
+Author: Bhavinkumar Rathava
+Author-email: Bhavinkumar Rathava <bhavinr9@gmail.com>
 License: MIT
-Project-URL: Homepage, https://github.com/yourusername/reddit-auto-mod
-Project-URL: Bug Reports, https://github.com/yourusername/reddit-auto-mod/issues
-Project-URL: Source, https://github.com/yourusername/reddit-auto-mod
+Project-URL: Homepage, https://github.com/Bhavinrathava/reddit-auto-mod
+Project-URL: Bug Reports, https://github.com/Bhavinrathava/reddit-auto-mod/issues
+Project-URL: Source, https://github.com/Bhavinrathava/reddit-auto-mod
 Keywords: reddit,moderation,ai,automation,openai
 Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Developers
@@ -74,7 +74,7 @@ pip install reddit-auto-mod
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/reddit-auto-mod.git
+git clone https://github.com/Bhavinrathava/reddit-auto-mod.git
 cd reddit-auto-mod
 
 # Install in development mode
@@ -406,8 +406,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For issues, questions, or contributions, please visit:
-- **GitHub Issues**: https://github.com/yourusername/reddit-auto-mod/issues
-- **Documentation**: https://github.com/yourusername/reddit-auto-mod/wiki
+- **GitHub Issues**: https://github.com/Bhavinrathava/reddit-auto-mod/issues
+- **Documentation**: https://github.com/Bhavinrathava/reddit-auto-mod/wiki
 
 ## Acknowledgments
 

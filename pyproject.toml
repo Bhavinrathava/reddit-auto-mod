@@ -11,7 +11,7 @@ requires-python = ">=3.8"
 license = {text = "MIT"}
 keywords = ["reddit", "moderation", "ai", "automation", "openai"]
 authors = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "Bhavinkumar Rathava", email = "bhavinr9@gmail.com"}
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -49,9 +49,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/reddit-auto-mod"
-"Bug Reports" = "https://github.com/yourusername/reddit-auto-mod/issues"
-"Source" = "https://github.com/yourusername/reddit-auto-mod"
+Homepage = "https://github.com/Bhavinrathava/reddit-auto-mod"
+"Bug Reports" = "https://github.com/Bhavinrathava/reddit-auto-mod/issues"
+"Source" = "https://github.com/Bhavinrathava/reddit-auto-mod"
 
 [project.scripts]
 reddit-auto-mod = "cli.main:main"
